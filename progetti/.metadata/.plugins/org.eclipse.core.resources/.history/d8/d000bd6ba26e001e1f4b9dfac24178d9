@@ -1,0 +1,10 @@
+package model;
+
+public class ContrattoLavoro {
+	
+	public static enum ContrattoLavoroEnum{
+		PART_TIME,
+		FULL_TIME
+	}
+	
+}

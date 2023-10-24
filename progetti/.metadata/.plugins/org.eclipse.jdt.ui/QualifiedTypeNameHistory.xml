@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="model.ContrattoLavoroEnum.ContrattoLavoro"/>
+    <fullyQualifiedTypeName name="model.ContrattoLavoroEnum"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="model.SportelloEnum.TipoSportello"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="model.Studente"/>
+    <fullyQualifiedTypeName name="model.Sportello"/>
+</qualifiedTypeNameHistroy>

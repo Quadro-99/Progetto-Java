@@ -1,0 +1,6 @@
+1697735436704	Rename type 'ContrattoLavoro'
+1697735739795	Encapsulate field 'sportelli'
+1697736278917	Encapsulate field 'sportello'
+1697736467394	Encapsulate field 'numero'
+1697736916240	Rename package 'Controller'
+1697737021364	Encapsulate field 'studentiPrenotati'

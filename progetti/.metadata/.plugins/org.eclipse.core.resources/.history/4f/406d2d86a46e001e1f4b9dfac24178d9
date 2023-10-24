@@ -1,0 +1,28 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Segretario extends Impiegato {
+
+	public Segretario() {
+		this.sportelli = new ArrayList<>();
+	}
+	
+	public void addSportello(String sportello) {
+		if(sportello != null) {
+			this.sportelli.add(sportello);
+		}
+	}
+	
+	public List<String> getSportelli() {
+		return sportelli;
+	}
+
+	public void setSportelli(List<String> sportelli) {
+		this.sportelli = sportelli;
+	}
+
+
+	private List<String> sportelli;
+}
