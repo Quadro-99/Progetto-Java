@@ -10,7 +10,7 @@ import Modello.*;
 public class ProfessoriController {
 
 	private List<Professore> professori; 
-	
+	//classe controller professori
 	
 	public ProfessoriController () throws FileNotFoundException {
 		
