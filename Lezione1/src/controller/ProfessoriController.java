@@ -39,7 +39,8 @@ public class ProfessoriController {
 	}
 	public void rimuoviProfessore(String nome, String cognome) {
 		for(int i=0; i<= professori.size(); i++)
-			if (professori.getNome(i)== nome && professori.getCognome(i)== cognome) {
+			if (professori.get(i).getNome().equals(nome) 
+					&& professori.get(i).getCognome().equals(cognome)) {
 				professori.remove(i);
 			}
 	}
