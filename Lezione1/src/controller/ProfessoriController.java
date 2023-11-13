@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import Modello.*;
 
@@ -21,14 +22,13 @@ public class ProfessoriController {
 			Professore p = Professore.read(sc1);
 			this.professori.add(p);
 		
-}
+		}
 	}
 
 
 	public List<Professore> getProfessori() {
 		return professori;
 	}
-
 
 	public void setProfessori(List<Professore> professori) {
 		this.professori = professori;
@@ -37,20 +37,21 @@ public class ProfessoriController {
 	public void aggiungiProfessore(Professore professore) {
 		professori.add(professore);
 	}
-	public void rimuoviProfessore(String nome, String cognome) {
-		for(int i=0; i<= professori.size(); i++)
-			if (professori.get(i).getNome().equals(nome) 
-					&& professori.get(i).getCognome().equals(cognome)) {
-				professori.remove(i);
-			}
-	}
-	public List<Professore> cercaProfessori(String nome, String cognome) {
-		List<Professore> risultato = new ArrayList<>();
-		for (Professore p: professori)
-			if(p.getNome() == nome && p.getCognome() == cognome) {
-				risultato.add(p);
-			}
-				return risultato;
 	
+	public void rimuoviProfessore(String nome, String cognome) {
+		professori.removeIf(p -> p.getNome().equals(nome) && p.getCognome().equals(cognome));
 	}
+	
+	public List<Professore> searchProfessoriByName(String nome, String cognome) {
+		return professori.stream()
+				.filter(p -> p.getNome().equals(nome) && p.getCognome().equals(cognome))
+				.collect(Collectors.toList());
+	}
+	
+	public List<Professore> searchProfessoreByContratto(TipoContratto tipocontratto){
+		return professori.stream()
+				.filter(p -> p.getContratto() == tipocontratto)
+				.collect(Collectors.toList());
+	}
+	
 }
