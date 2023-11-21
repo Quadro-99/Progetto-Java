@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,8 +13,10 @@ import Modello.Aula;
 
 public class AulaController {
 	private List<Aula> aulee;
+	
 
 	public AulaController () throws FileNotFoundException {
+
 		File f = new File(getClass().getResource("/storage/aulee.dat").getFile());
 		Scanner sc1 = new Scanner(f);
 		this.aulee = new ArrayList<>();
@@ -30,9 +33,10 @@ public class AulaController {
 	}
 
 
-	public List<Aula> searchAulaByNomeAula(String name){
+	public Aula searchAulaByNomeAula(String name){
 		return aulee.stream()
-				.filter(a -> a.getNomeAula().equals(name)).collect(Collectors.toList());
+				.filter(a -> a.getNomeAula().equals(name))
+				.collect(Collectors.toList()).get(0);
 	}
 	
 	public List<Aula> searchAuleeByPostiGreatherThan(int posti){
@@ -47,7 +51,8 @@ public class AulaController {
 	
 	public List<Aula> searchAuleeByPostiRecognized(){
 		return aulee.stream()
-				.filter(a -> a.getPosti() != -1).collect(Collectors.toList());
+				.filter(a -> a.getPosti() != -1)
+				.collect(Collectors.toList());
 	}
 	
 }

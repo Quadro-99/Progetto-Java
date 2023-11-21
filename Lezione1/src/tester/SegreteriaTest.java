@@ -5,14 +5,22 @@ import java.util.List;
 import Modello.Aula;
 import controller.AulaController;
 import controller.CorsiController;
+import controller.ProfessoriController;
+import controller.StudenteController;
 
 public class SegreteriaTest {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		
+	
+		StudenteController sc = new StudenteController();
+		ProfessoriController pc = new ProfessoriController();
 		AulaController ac = new AulaController();
 		
-		List<Aula> auleeSenzaPosti = ac.searchAuleeByPostiNotRecognized();
+		CorsiController cc = new CorsiController(pc, sc , ac); 
+		System.out.println(cc.getCorsi().get(0).getDocente().getCognome());
+		
+		
+		/*List<Aula> auleeSenzaPosti = ac.searchAuleeByPostiNotRecognized();
 		List<Aula> auleeConPosti = ac.searchAuleeByPostiRecognized();
 		
 		System.out.println("AULEE UNIVERSITA'\n");
@@ -26,7 +34,7 @@ public class SegreteriaTest {
 		
 		System.out.println("\n\nAULEE CON POSTI: \n");
 		auleeConPosti.forEach(a -> System.out.println(a.getNomeAula() + " " + a.getPosti()));
-		
+		*/
 		
 		
 		

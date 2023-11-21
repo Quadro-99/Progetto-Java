@@ -1,6 +1,8 @@
 package controller;
 import java.util.List;
+
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -33,15 +35,11 @@ public StudenteController () throws FileNotFoundException {
         studenti.remove(studente);
     }
 		
-	public List<Studente> getStudentiByMatricola (int matricola){
-			List<Studente> iscritti = new ArrayList<>();
-			for (Studente s: studenti)
-				if (s.getMatricola() == matricola) {
-					iscritti.add(s);
-				}
-			return iscritti; 
+	public List<Studente> getStudentiByMatricola (List<Integer> matricole){
+			return 	this.studenti.stream()
+					.filter(ss -> matricole.stream().anyMatch(m -> m == ss.getMatricola()))
+					.collect(Collectors.toList());
 		}
-	
 
 	public List<Studente> getStudenti() {
 		return studenti;

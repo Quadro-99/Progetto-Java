@@ -4,41 +4,61 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import Modello.*;
 
 public class CorsiController {
 	
-	private List<Studente> studenti;
+
 	private List<Corso> corsi; 
-	private List<Professore> professori; 
+
+	private ProfessoriController pc; 
+	private StudenteController sc; 
+	private AulaController ac;
 	
-	public CorsiController () throws FileNotFoundException {
+	public CorsiController (ProfessoriController pc, StudenteController sc,AulaController ac) throws FileNotFoundException {
+		this.pc = pc;
+		this.sc = sc;
+		this.ac = ac; 
 		
-		File f = new File(getClass().getResource("/storage/professori.dat").getFile());
-		File f1 = new File(getClass().getResource("/storage/studenti.dat").getFile());
+		File f = new File(getClass().getResource("/storage/corsi.dat").getFile());
 		Scanner sc1 = new Scanner(f);
-		this.professori = new ArrayList<>();
+		this.corsi = new ArrayList<>();
 		while (sc1.hasNextLine()) {
-			Professore p = Professore.read(sc1);
-			this.professori.add(p);
-		}
-		sc1 = new Scanner(f1);
-		this.studenti = new ArrayList<>();
-		while (sc1.hasNextLine()) {
-			Studente s = Studente.read(sc1);
-			this.studenti.add(s);
+			if(Boolean.TRUE == sc1.hasNextLine()) {
+				String nomeCorso = sc1.nextLine();
+				String cfu = sc1.nextLine();
+				String docente = sc1.nextLine();
+				String aula = sc1.nextLine();
+				String esame = sc1.nextLine();
+				String frequenza = sc1.nextLine();
+				sc1.nextLine();
+				List<Integer> matricole = new ArrayList<>();
+				boolean done = false; 
+				while(!done) {
+					String token = sc1.nextLine();
+					if(token.equals("#")) done = true;
+					else matricole.add(Integer.parseInt(token));
+				}
+				Professore p = this.pc.searchProfessoreBySurname(docente);
+				Aula a = this.ac.searchAulaByNomeAula(aula);
+				Esame e = new Esame();
+				List<Studente> ls = this.sc.getStudentiByMatricola(matricole);
+				Corso.CFU c = Corso.CFU.valueOf(cfu);
+				Corso.FrequenzaCorso fc = Corso.FrequenzaCorso.valueOf(frequenza);
+				Corso corso = new Corso(p, nomeCorso, a, e, ls, c, fc); 
+				corsi.add(corso);
+				
+			}
+			
+			
 		}
 	}
 
 	public List<Corso> getCorsiByName(String name){
-		List<Corso> trovati = new ArrayList<>();
-		for(Corso c : corsi) {
-			if(c.getNomeCorso().equalsIgnoreCase(name)) {
-				trovati.add(c);
-			}
-		}
-		return trovati;
+		return corsi.stream().filter(c -> c.getNomeCorso().equals(name)).collect(Collectors.toList());
+			
 	}
 
 	public List<Corso> getCorsi() {
@@ -49,21 +69,7 @@ public class CorsiController {
 		this.corsi = corsi;
 	}
 
-	public List<Professore> getProfessori() {
-		return professori;
-	}
-
-	public void setProfessori(List<Professore> professori) {
-		this.professori = professori;
-	}
-
-	public List<Studente> getStudenti() {
-		return studenti;
-	}
-
-	public void setStudenti(List<Studente> studenti) {
-		this.studenti = studenti;
-	}
+	
 	
 }
 

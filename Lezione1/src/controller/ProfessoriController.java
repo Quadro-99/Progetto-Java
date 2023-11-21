@@ -47,6 +47,11 @@ public class ProfessoriController {
 				.filter(p -> p.getNome().equals(nome) && p.getCognome().equals(cognome))
 				.collect(Collectors.toList());
 	}
+	public Professore searchProfessoreBySurname(String cognome) {
+		return professori.stream()
+				.filter(p -> p.getCognome().equals(cognome))
+				.collect(Collectors.toList()).get(0);
+	}
 	
 	public List<Professore> searchProfessoreByContratto(TipoContratto tipocontratto){
 		return professori.stream()

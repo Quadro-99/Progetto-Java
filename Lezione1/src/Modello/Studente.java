@@ -42,8 +42,8 @@ public static Studente read(Scanner sc) {
 	String nome = sc.nextLine();
 	if(Boolean.FALSE == sc.hasNextLine()) return null;
 	String cognome = sc.nextLine();
-	if(Boolean.FALSE == sc.hasNextInt()) return null; 
-	int matricola = sc.nextInt(); 
+	if(Boolean.FALSE == sc.hasNextLine()) return null; 
+	int matricola = Integer.parseInt(sc.nextLine()); 
 	return new Studente(nome, cognome, matricola);
 }
 }
